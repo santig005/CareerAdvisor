@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Hola {% endblock %}
+
+{% block content %}
+    <!-- Courses Start -->
+    <div class="container-xxl py-6">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <h6 class="text-primary text-uppercase mb-2">Programas top</h6>
+                <h1 class="display-6 mb-4">Estos son los programas más relevantes que hemos encontrado</h1>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="courses-item d-flex flex-column bg-light overflow-hidden h-100">
+                        <div class="text-center p-4 pt-0">
+                            <div class="d-inline-block bg-primary text-white fs-5 py-1 px-4 mb-4">$108000000</div>
+                            <h5 class="mb-3">Ingeniería de Sistemas</h5>
+                            <h5 class="mb-3">Universidad Eafit</h5>
+                            <h6 class="mb-3">Presencial</h6>
+                            <p>
+                                Tecnología-
+                                Software-
+                                Programación-
+                                Sistemas
+                            </p>
+                            <ol class="breadcrumb justify-content-center mb-0">
+                                <li class="breadcrumb-item small"><i class="fa fa-signal text-primary me-2"></i>Pregrado</li>
+                                <li class="breadcrumb-item small"><i class="fa fa-calendar-alt text-primary me-2"></i>4.5 años</li>
+                            </ol>
+                        </div>
+                        <div class="position-relative mt-auto">
+                            <img class="img-fluid" src="{% static 'assets/img/eafit.png' %}" alt="">
+                            <div class="courses-overlay">
+                                <a class="btn btn-outline-primary border-2" href="">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="courses-item d-flex flex-column bg-light overflow-hidden h-100">
+                        <div class="text-center p-4 pt-0">
+                            <div class="d-inline-block bg-primary text-white fs-5 py-1 px-4 mb-4">$0</div>
+                            <h5 class="mb-3">Ingeniería Aeroespacial</h5>
+                            <h5 class="mb-3">Universidad de Antioquia</h5>
+                            <h6 class="mb-3">Presencial</h6>
+                            <p>Espacio-Cohetes-Aeronaves</p>
+                            <ol class="breadcrumb justify-content-center mb-0">
+                                <li class="breadcrumb-item small"><i class="fa fa-signal text-primary me-2"></i>Pregrado</li>
+                                <li class="breadcrumb-item small"><i class="fa fa-calendar-alt text-primary me-2"></i>5 años</li>
+                            </ol>
+                        </div>
+                        <div class="position-relative mt-auto text-center">
+                            <img class="img-fluid" src="{% static 'assets/img/udea.jpg' %}" alt="">
+                            <div class="courses-overlay">
+                                <a class="btn btn-outline-primary border-2" href="">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="courses-item d-flex flex-column bg-light overflow-hidden h-100">
+                        <div class="text-center p-4 pt-0">
+                            <div class="d-inline-block bg-primary text-white fs-5 py-1 px-4 mb-4">$0</div>
+                            <h5 class="mb-3">Ingeniería Mecánica</h5>
+                            <h5 class="mb-3">Universidad Nacional</h5>
+                            <h6 class="mb-3">Presencial</h6>
+                            <p>Engranajes-Vehiculos-Maquinas</p>
+                            <ol class="breadcrumb justify-content-center mb-0">
+                                <li class="breadcrumb-item small"><i class="fa fa-signal text-primary me-2"></i>Pregrado</li>
+                                <li class="breadcrumb-item small"><i class="fa fa-calendar-alt text-primary me-2"></i>5 años</li>
+                            </ol>
+                        </div>
+                        <div class="position-relative mt-auto text-center">
+                            <img class="img-fluid" src="{% static 'assets/img/unal.jpg' %}" alt="">
+                            <div class="courses-overlay">
+                                <a class="btn btn-outline-primary border-2" href="">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Courses End -->
+{% endblock %}
