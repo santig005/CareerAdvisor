@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'page',
+    'courses',
+    'profiling',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +57,7 @@ ROOT_URLCONF = "careeradvisor.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        'DIRS': [os.path.join(BASE_DIR, 'careeradvisor/templates/'), ],
+        'DIRS': [os.path.join(BASE_DIR, 'page/templates'), ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
