@@ -5,7 +5,9 @@
     --light: #F3F6F8;
     --dark: #0C2B4B;
 }
-
+.custom-short-height {
+    height: 150px; /* Ajusta la altura según tus necesidades */
+}
 .py-6 {
     padding-top: 6rem;
     padding-bottom: 6rem;

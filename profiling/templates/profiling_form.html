@@ -1,13 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %} Hola {% endblock %}
+{% block title %} Perfilamiento {% endblock %}
 
 {% block content %}
 <div class="container">
     <h1 style="padding-bottom: 50px;" >Déjanos saber un poco más de ti 😁</h1>
-    
-    <!-- Campos de texto en una sola fila con marcadores de posición -->
-    <form>
         <div class="row"style="padding-bottom: 50px;" >
             <div class="col-md-4">
                 <input type="text" class="form-control" name="nombre" placeholder="Nombre">
@@ -19,247 +16,181 @@
                 <input type="email" class="form-control" name="email" placeholder="Email">
             </div>
         </div>
+    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;" ">
+        <h2 style="padding-bottom: 50px;">¿Tienes estudios formales?</h2>
+        <div class="row">
+            <div class="card col-md-4"style="max-width: 25%; max-height: 25%;">
+                <a id="studies-link"href=""><img opacity="1" id="studies-image"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
+                <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Sí tengo</h5>
+            </div>
+            <div id="studies" style="display:none">
+                <div class="row d-flex">
+                    <div class="card col-md-4"style="max-width: 20%; max-height: 20%;">
+                        <a id="undergraduate-link"href=""><img id="undergraduate-image"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
+                        <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Pregrado</h5>
+                    </div>
+                    <div id="undergraduate" style="display:none">
+                        <div class="row d-flex">
+                            <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
+                                <a data-course-id="1" data-selected="false" id="course-link-1"class="course-link" href=""><img id="course-image-1"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
+                            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Derecho</h5>
+                            </div>
+                            <div id="university-1" style="display:none">
+                                <div class="row d-flex">
+                                    <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
+                                        <a data-university-id="1" data-selected="false" id="university-link-1-1"data-course-id="1"class="university-link" href=""><img id="university-image-1-1"src="{% static 'assets/img/udea.jpg' %}" class="rounded-circle img-fluid border "></a>
+                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Udea</h5>
+                                    </div>
+                                    <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
+                                        <a data-university-id="2" data-selected="false" id="university-link-1-2"data-course-id="1"class="university-link" href=""><img id="university-image-1-2"src="{% static 'assets/img/unal.jpg' %}" class="rounded-circle img-fluid border "></a>
+                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Universidad Nacional</h5>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
+                                <a data-course-id="2" data-selected="false" id="course-link-2"class="course-link" href=""><img id="course-image-2"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
+                            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Medicina</h5>
+                            </div>
+                            <div id="university-2" style="display:none">
+                                <div class="row d-flex">
+                                    <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
+                                        <a data-university-id="1" data-selected="false" id="university-link-2-1" data-course-id="2" class="university-link" href=""><img id="university-image-2-1"src="{% static 'assets/img/eafit.jpg' %}" class="rounded-circle img-fluid border "></a>
+                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Eafit</h5>
+                                    </div>
+                                    <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
+                                        <a data-university-id="2" data-selected="false" id="university-link-2-2"data-course-id="2"class="university-link" href=""><img id="university-image-2-2"src="{% static 'assets/img/unal.jpg' %}" class="rounded-circle img-fluid border "></a>
+                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Universidad Nacional</h5>
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="card col-md-4" style="max-width: 20%; max-height: 20%;">
+                        <a href=""><img src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border custom-short-height"></a>
+                        <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Posgrado</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card col-md-4"style="max-width: 25%; max-height: 25%;">
+                <a id="no-studies-link"href=""><img id="no-studies_image"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
+                <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">No, Ninguno</h5>
+            </div>
+        </div>
+    </div>
+    <form id="my-form" method="POST" action="{% url 'results' %}">
+        {% csrf_token %}
+    
+        <!-- Agregar campos ocultos para opciones seleccionadas -->
+        <input type="hidden" name="estudios" id="estudios-selected" value="a">
+        <input type="hidden" name="pregrado" id="pregrado-selected" value="">
+        <input type="hidden" name="cursos" id="cursos-selected" value="">
+    
+        <button type="submit" class="btn btn-primary send_button py-sm-3 px-sm-5">Enviar</button>
     </form>
-    
-    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;" ">
-        <h2 style="padding-bottom: 50px;">¿Cuáles son tus estudios?</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Tecnologia">
-                    <span class="circle">Bachillerato</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Software">
-                    <span class="circle">Pregrado</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Especialización">
-                    <span class="circle">Especialización</span>
-                </label>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Maestría">
-                    <span class="circle">Maestría</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Doctorado">
-                    <span class="circle">Doctorado</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Ninguno">
-                    <span class="circle">Ninguno</span>
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;" ">
-        <h2 style="padding-bottom: 50px;">¿Cuáles son tus preferencias para tu próximo programa?</h2>
-        <div class="row">
-            <h3>Modalidad</h3>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio"name="modalidad" value="Virtual">
-                    <span class="circle">Virtual</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio"name="modalidad" value="Presencial">
-                    <span class="circle">Presencial</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" name="modalidad" value="Indifirente">
-                    <span class="circle">Indiferente</span>
-                </label>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <h3>Tiempo</h3>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="horas1">
-                    <span class="circle">30-100 horas</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="años2">
-                    <span class="circle">1-2 años</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="años3">
-                    <span class="circle">2-4 años</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="años4">
-                    <span class="circle">Más de 4 años</span>
-                </label>
-            </div>
-        </div>
-    </div>
-    <!-- Barra deslizable para el presupuesto -->
-    <div class="row mt-3">
-        <div class="col-md-6">
-            <label for="presupuesto">Presupuesto    </label>
-            <input type="range" id="presupuesto" name="presupuesto" min="0" max="150000000" value="0">
-        </div>
-        <div class="col-md-6">
-            <output for="presupuesto" id="presupuestoOutput">$0 Pesos</output>
-        </div>
-    </div>
-    <script>
-        const presupuestoInput = document.getElementById("presupuesto");
-        const presupuestoOutput = document.getElementById("presupuestoOutput");
-    
-        presupuestoInput.addEventListener("input", () => {
-            const value = presupuestoInput.value;
-            const formattedValue = new Intl.NumberFormat("es-ES", {
-                style: "currency",
-                currency: "COP"
-            }).format(value);
-    
-            presupuestoOutput.textContent = formattedValue;
-        });
-    </script>
-    
-    
-    
-    
-    
-    
-
-    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;">
-        <h2 style="padding-bottom: 50px;">Cuéntanos qué te gusta y/o en qué tienes interés</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Tecnologia">
-                    <span class="circle">Tecnología</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Software">
-                    <span class="circle">Software</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Programacion">
-                    <span class="circle">Programación</span>
-                </label>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Sistemas">
-                    <span class="circle">Sistemas</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Informatica">
-                    <span class="circle">Informática</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Vehiculos">
-                    <span class="circle">Vehículos</span>
-                </label>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Espacio">
-                    <span class="circle">Espacio</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Cohetes">
-                    <span class="circle">Cohetes</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Aeronaves">
-                    <span class="circle">Aeronaves</span>
-                </label>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Maquinas">
-                    <span class="circle">Máquinas</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Engranajes">
-                    <span class="circle">Engranajes</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Construcción">
-                    <span class="circle">Construcción</span>
-                </label>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Obras Civiles">
-                    <span class="circle">Obras Civiles</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Ambiente">
-                    <span class="circle">Ambiente</span>
-                </label>
-            </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Naturaleza">
-                    <span class="circle">Naturaleza</span>
-                </label>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" value="Medio Ambiente">
-                    <span class="circle">Medio Ambiente</span>
-                </label>
-            </div>
-        </div>
-    </div>
-    <a href="{% url 'results' %}" class="btn btn-primary py-sm-3 px-sm-5">Enviar</a>
-
-
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // This script display the studies section when "Si tengo" option is selected
+        const studiesLink = document.getElementById("studies-link");
+        const studiesSection = document.getElementById("studies");
+        const studiesImage = document.getElementById("studies-image");
+        studiesLink.addEventListener("click", function(e) {
+            e.preventDefault();
+    
+            if (studiesSection.style.display === "none") {
+                studiesImage.src="{% static 'assets/img/selector_image.jpg' %}"
+                studiesSection.style.display = "block";
+            } else {
+                studiesImage.src="{% static 'assets/img/selector_image_b.jpg' %}"
+                studiesSection.style.display = "none";
+            }
+        });
+        // This script display the undergraduate section when "Pregrado" option is selected
+        const undergraduateLink = document.getElementById("undergraduate-link");
+        const undergraduateSection = document.getElementById("undergraduate");
+        const undergraduateImage = document.getElementById("undergraduate-image");
+        undergraduateLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (undergraduateSection.style.display === "none") {
+                undergraduateImage.src="{% static 'assets/img/selector_image.jpg' %}"
+                undergraduateSection.style.display = "block";
+            } else {
+                undergraduateImage.src="{% static 'assets/img/selector_image_b.jpg' %}"
+                undergraduateSection.style.display = "none";
+            }
+        });
+        const courseLinks = document.querySelectorAll(".course-link");
+        courseLinks.forEach(function(link) {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                const courseId = link.dataset.courseId;
+                const courseImage = document.getElementById(`course-image-${courseId}`);
+                const courseLink = document.getElementById(`course-link-${courseId}`);
+                const universitySection = document.getElementById(`university-${courseId}`);
+                if (courseLink.classList.contains("selected")) {
+                courseImage.src = "{% static 'assets/img/selector_image_b.jpg' %}";
+                courseLink.classList.remove("selected");
+                universitySection.style.display = "none";
+                } else {
+                    courseImage.src = "{% static 'assets/img/selector_image.jpg' %}";
+                    courseLink.classList.add("selected");
+                    universitySection.style.display = "block";
+                }
+            });
+        });
+        const universityLinks = document.querySelectorAll(".university-link");
+        universityLinks.forEach(function(link) {
+            link.addEventListener("click", function(e) {
+                e.preventDefault();
+                const universityId = link.dataset.universityId;
+                const courseId = link.dataset.courseId;
+                const universityImage = document.getElementById(`university-image-${courseId}-${universityId}`);
+                const universityLink = document.getElementById(`university-link-${courseId}-${universityId}`);
+                if (universityLink.classList.contains("selected")) {
+                universityImage.src = "{% static 'assets/img/selector_image_b.jpg' %}";
+                universityLink.classList.remove("selected");
+                } else {
+                    universityImage.src = "{% static 'assets/img/selector_image.jpg' %}";
+                    universityLink.classList.add("selected");
+                }
+            });
+        });
+        const form = document.getElementById("my-form");
+        const estudiosSelected = document.getElementById("estudios-selected");
+        const pregradoSelected = document.getElementById("pregrado-selected");
+        const cursosSelected = document.getElementById("cursos-selected");
+        const sendButton = document.querySelector(".send_button");
+
+        sendButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            const estudios = document.getElementById("studies").style.display === "block" ? "Sí" : "No";
+            const pregrado = document.getElementById("undergraduate").style.display === "block" ? "Pregrado" : "";
+            const selectedCursos = document.querySelectorAll(".course-link.selected");
+            const cursos = Array.from(selectedCursos).map(course => course.nextElementSibling.textContent).join(", ");
+            estudiosSelected.value = estudios;
+            pregradoSelected.value = pregrado;
+            cursosSelected.value = cursos;
+            form.submit();
+        });
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    });
+    
+
+</script>   
+
 {% endblock %}
