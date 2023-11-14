@@ -16,63 +16,45 @@
                 <input type="email" class="form-control" name="email" placeholder="Email">
             </div>
         </div>
-    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;" ">
+    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;">
         <h2 style="padding-bottom: 50px;">¿Tienes estudios formales?</h2>
         <div class="row">
             <div class="card col-md-4"style="max-width: 25%; max-height: 25%;">
-                <a id="studies-link"href=""><img opacity="1" id="studies-image"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
+                <a id="studies-link"href=""><img id="studies-image"src="{% static 'assets/img/studies.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
                 <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Sí tengo</h5>
             </div>
             <div id="studies" style="display:none">
                 <div class="row d-flex">
+                    {% for level in levels %}
                     <div class="card col-md-4"style="max-width: 20%; max-height: 20%;">
-                        <a id="undergraduate-link"href=""><img id="undergraduate-image"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
-                        <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Pregrado</h5>
+                        <a id="{{level.0}}-link"href=""><img id="{{level.0}}-image"src="{% static 'assets/img/studies.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
+                        <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">{{level.0}}</h5>
                     </div>
-                    <div id="undergraduate" style="display:none">
+                    <div id="{{level.0}}" style="display:none">
                         <div class="row d-flex">
-                            <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
-                                <a data-course-id="1" data-selected="false" id="course-link-1"class="course-link" href=""><img id="course-image-1"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
-                            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Derecho</h5>
+                            {% for under in level.1 %}
+                            <div class="card col-md-4"style="max-width: 18%; max-height: 18%;">
+                                <a data-course-id="{{under.idcourse}}" data-selected="false" id="course-link-{{under.idcourse}}"class="course-link {{level.0}}" href=""><img id="course-image-{{under.idcourse}}"src="{% static 'assets/img/studies.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
+                            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">{{under.name}}</h5>
                             </div>
-                            <div id="university-1" style="display:none">
+                            <div id="university-{{under.idcourse}}" style="display:none">
                                 <div class="row d-flex">
+                                    {% for uni in under.universities %}
                                     <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
-                                        <a data-university-id="1" data-selected="false" id="university-link-1-1"data-course-id="1"class="university-link" href=""><img id="university-image-1-1"src="{% static 'assets/img/udea.jpg' %}" class="rounded-circle img-fluid border "></a>
-                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Udea</h5>
+                                        <a data-university-id="{{uni.idcollege}}" data-selected="false" id="university-link-{{under.idcourse}}-{{uni.idcollege}}"data-course-id="{{under.idcourse}}"class="university-link" href=""><img id="university-image-{{under.idcourse}}-{{uni.idcollege}}"src="{{ uni.logo.url }}" class="rounded-circle img-fluid border inactive"></a>
+                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">{{uni.name}}</h5>
                                     </div>
-                                    <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
-                                        <a data-university-id="2" data-selected="false" id="university-link-1-2"data-course-id="1"class="university-link" href=""><img id="university-image-1-2"src="{% static 'assets/img/unal.jpg' %}" class="rounded-circle img-fluid border "></a>
-                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Universidad Nacional</h5>
-                                    </div>
-                                </div> 
+                                    {% endfor %}
+                                </div>
                             </div>
-                            <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
-                                <a data-course-id="2" data-selected="false" id="course-link-2"class="course-link" href=""><img id="course-image-2"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
-                            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Medicina</h5>
-                            </div>
-                            <div id="university-2" style="display:none">
-                                <div class="row d-flex">
-                                    <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
-                                        <a data-university-id="1" data-selected="false" id="university-link-2-1" data-course-id="2" class="university-link" href=""><img id="university-image-2-1"src="{% static 'assets/img/eafit.jpg' %}" class="rounded-circle img-fluid border "></a>
-                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Eafit</h5>
-                                    </div>
-                                    <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
-                                        <a data-university-id="2" data-selected="false" id="university-link-2-2"data-course-id="2"class="university-link" href=""><img id="university-image-2-2"src="{% static 'assets/img/unal.jpg' %}" class="rounded-circle img-fluid border "></a>
-                                    <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Universidad Nacional</h5>
-                                    </div>
-                                </div> 
-                            </div>
+                            {% endfor %}
                         </div>  
                     </div>
-                    <div class="card col-md-4" style="max-width: 20%; max-height: 20%;">
-                        <a href=""><img src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border custom-short-height"></a>
-                        <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Posgrado</h5>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="card col-md-4"style="max-width: 25%; max-height: 25%;">
-                <a id="no-studies-link"href=""><img id="no-studies_image"src="{% static 'assets/img/selector_image_b.jpg' %}" class="rounded-circle img-fluid border "></a>
+                <a id="no-studies-link"href=""><img id="no-studies-image"src="{% static 'assets/img/studies.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
                 <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">No, Ninguno</h5>
             </div>
         </div>
@@ -81,45 +63,119 @@
         {% csrf_token %}
     
         <!-- Agregar campos ocultos para opciones seleccionadas -->
-        <input type="hidden" name="estudios" id="estudios-selected" value="a">
-        <input type="hidden" name="pregrado" id="pregrado-selected" value="">
-        <input type="hidden" name="cursos" id="cursos-selected" value="">
-    
+        <input type="hidden" name="estudios" id="studies-selected" value="">
+        {% for level in levels %}
+        <input type="hidden" name="{{level.0}}" id="{{level.0}}-selected" value="">
+        {% endfor %}
+        <input type="hidden" name="cursos" id="courses-selected" value="">
+        <input type="hidden" name="universidades" id="universities-selected" value="">
         <button type="submit" class="btn btn-primary send_button py-sm-3 px-sm-5">Enviar</button>
     </form>
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // This script display the studies section when "Si tengo" option is selected
+        function unselect_image(item){
+            item.classList.remove("active");
+            item.classList.add("inactive");
+        }
+        function select_image(item){
+            item.classList.remove("inactive");
+            item.classList.add("active");
+        }
+        function unselect_universities(courseId){
+            universityLinks.forEach (university => {
+                const universityId = university.dataset.universityId;
+                    const universityImage = document.getElementById(`university-image-${courseId}-${universityId}`);
+                    const universityLink = document.getElementById(`university-link-${courseId}-${universityId}`);
+                    if (universityLink && universityLink.classList.contains("selected")) {
+                    unselect_image(universityImage)
+                    universityLink.classList.remove("selected");
+                    }
+                }
+            );
+        }
+        function unselect_courses(level){
+            const levelLink = document.getElementById(level+"-link");
+            const levelSection = document.getElementById(level);
+            const levelImage = document.getElementById(level+"-image");
+            if (levelSection.style.display === "block") {
+                unselect_image(levelImage)
+                levelSection.style.display = "none";
+            }
+            const courseLinks = document.querySelectorAll("."+level);
+            courseLinks.forEach(course => {
+                const courseId = course.dataset.courseId;
+                const courseImage = document.getElementById(`course-image-${courseId}`);
+                const courseLink = document.getElementById(`course-link-${courseId}`);
+                const universitySection = document.getElementById(`university-${courseId}`);
+                if (courseLink.classList.contains("selected")) {
+                unselect_image(courseImage)
+                courseLink.classList.remove("selected");
+                universitySection.style.display = "none";
+                }
+                unselect_universities(courseId);
+            });
+        }
         const studiesLink = document.getElementById("studies-link");
         const studiesSection = document.getElementById("studies");
         const studiesImage = document.getElementById("studies-image");
         studiesLink.addEventListener("click", function(e) {
             e.preventDefault();
-    
             if (studiesSection.style.display === "none") {
-                studiesImage.src="{% static 'assets/img/selector_image.jpg' %}"
+                if(noStudiesImage.classList.contains("active")){
+                    unselect_image(noStudiesImage)
+                }
+                select_image(studiesImage)
                 studiesSection.style.display = "block";
             } else {
-                studiesImage.src="{% static 'assets/img/selector_image_b.jpg' %}"
+                unselect_image(studiesImage)
+                studiesSection.style.display = "none";
+                unselect_courses("pregrado");
+                unselect_courses("maestría");
+                unselect_courses("doctorado");
+            }
+        });
+        // This script display the studies section when "No, no tengo" option is selected
+        const noStudiesLink = document.getElementById("no-studies-link");
+        const noStudiesImage = document.getElementById("no-studies-image");
+        const courseLinks = document.querySelectorAll(".course-link");
+        noStudiesLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (studiesSection.style.display === "block") {
+                unselect_image(studiesImage)
+                select_image(noStudiesImage)
                 studiesSection.style.display = "none";
             }
-        });
-        // This script display the undergraduate section when "Pregrado" option is selected
-        const undergraduateLink = document.getElementById("undergraduate-link");
-        const undergraduateSection = document.getElementById("undergraduate");
-        const undergraduateImage = document.getElementById("undergraduate-image");
-        undergraduateLink.addEventListener("click", function(e) {
-            e.preventDefault();
-            if (undergraduateSection.style.display === "none") {
-                undergraduateImage.src="{% static 'assets/img/selector_image.jpg' %}"
-                undergraduateSection.style.display = "block";
-            } else {
-                undergraduateImage.src="{% static 'assets/img/selector_image_b.jpg' %}"
-                undergraduateSection.style.display = "none";
+            else{
+                if(noStudiesImage.classList.contains("active")){
+                    unselect_image(noStudiesImage)
+                }
+                else{
+                    select_image(noStudiesImage)
+
+                }
             }
+            unselect_courses("pregrado");
+            unselect_courses("maestría");
+            unselect_courses("doctorado");
         });
-        const courseLinks = document.querySelectorAll(".course-link");
+        function event_level(level){
+            const levelLink = document.getElementById(level+"-link");
+            const levelSection = document.getElementById(level);
+            const levelImage = document.getElementById(level+"-image");
+            levelLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            if (levelSection.style.display === "none") {
+                select_image(levelImage)
+                levelSection.style.display = "block";
+            } else {
+                unselect_courses(level)
+            }
+            });
+        }
+        event_level("pregrado")
+        event_level("maestría")
+        event_level("doctorado")
         courseLinks.forEach(function(link) {
             link.addEventListener("click", function(e) {
                 e.preventDefault();
@@ -128,11 +184,12 @@
                 const courseLink = document.getElementById(`course-link-${courseId}`);
                 const universitySection = document.getElementById(`university-${courseId}`);
                 if (courseLink.classList.contains("selected")) {
-                courseImage.src = "{% static 'assets/img/selector_image_b.jpg' %}";
+                unselect_image(courseImage)
                 courseLink.classList.remove("selected");
                 universitySection.style.display = "none";
+                unselect_universities(courseId);
                 } else {
-                    courseImage.src = "{% static 'assets/img/selector_image.jpg' %}";
+                    select_image(courseImage)
                     courseLink.classList.add("selected");
                     universitySection.style.display = "block";
                 }
@@ -147,49 +204,43 @@
                 const universityImage = document.getElementById(`university-image-${courseId}-${universityId}`);
                 const universityLink = document.getElementById(`university-link-${courseId}-${universityId}`);
                 if (universityLink.classList.contains("selected")) {
-                universityImage.src = "{% static 'assets/img/selector_image_b.jpg' %}";
-                universityLink.classList.remove("selected");
-                } else {
-                    universityImage.src = "{% static 'assets/img/selector_image.jpg' %}";
+                    unselect_image(universityImage)
+                    universityLink.classList.remove("selected");
+                } else{
+                    select_image(universityImage)
                     universityLink.classList.add("selected");
                 }
             });
         });
         const form = document.getElementById("my-form");
-        const estudiosSelected = document.getElementById("estudios-selected");
-        const pregradoSelected = document.getElementById("pregrado-selected");
-        const cursosSelected = document.getElementById("cursos-selected");
+        const studiesSelected = document.getElementById("studies-selected");
+        const undergraduateSelected = document.getElementById("pregrado-selected");
+        const masterSelected = document.getElementById("maestría-selected");
+        const doctorateSelected = document.getElementById("doctorado-selected");
+        const coursesSelected = document.getElementById("courses-selected");
+        const universitiesSelected = document.getElementById("universities-selected");
         const sendButton = document.querySelector(".send_button");
 
         sendButton.addEventListener("click", function(e) {
             e.preventDefault();
             const estudios = document.getElementById("studies").style.display === "block" ? "Sí" : "No";
-            const pregrado = document.getElementById("undergraduate").style.display === "block" ? "Pregrado" : "";
+            const undergraduate = document.getElementById("pregrado").style.display === "block" ? "Pregrado" : "";
+            const master = document.getElementById("maestría").style.display === "block" ? "Master" : "";
+            const doctorate = document.getElementById("doctorado").style.display === "block" ? "Doctorado" : "";
             const selectedCursos = document.querySelectorAll(".course-link.selected");
-            const cursos = Array.from(selectedCursos).map(course => course.nextElementSibling.textContent).join(", ");
-            estudiosSelected.value = estudios;
-            pregradoSelected.value = pregrado;
-            cursosSelected.value = cursos;
+            const selectedUniversities = document.querySelectorAll(".university-link.selected");
+            const cursos = Array.from(selectedCursos).map(course => course.dataset.courseId).join(", ");
+            const universities = Array.from(selectedUniversities).map(university => university.dataset.universityId).join(", ");
+            studiesSelected.value = estudios;
+            undergraduateSelected.value = undergraduate;
+            masterSelected.value = master;
+            doctorateSelected.value = doctorate;            
+            coursesSelected.value = cursos;
+            universitiesSelected.value = universities;
             form.submit();
         });
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     });
-    
 
 </script>   
 
