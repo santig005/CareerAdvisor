@@ -6,6 +6,18 @@
     --dark: #0C2B4B;
 }
 
+.inactive {
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+.active {
+    opacity: 1.0;
+    filter: grayscale(0%);
+}
+
+.custom-short-height {
+    height: 150px; /* Ajusta la altura según tus necesidades */
+}
 .py-6 {
     padding-top: 6rem;
     padding-bottom: 6rem;
