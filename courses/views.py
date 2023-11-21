@@ -2,6 +2,12 @@ from django.shortcuts import render
 from page.models import Courses, College
 # Create your views here.
 
+
+# Get the greastest price of the courses
+def greatest_course_price():
+    allcourses = Courses.objects.order_by('-price')
+    return allcourses[0].price
+
 # The next function gets the set of different course names
 def get_unique_course_names(level):
     allcourses = Courses.objects.filter(academic_level=level).values()
@@ -21,7 +27,6 @@ def get_provider_colleges(course_name):
 
 # The next function gets the set of courses with different name as well as the group of colleges that provide that course
 def get_courses_from_level(level):
-    print(f'Buscando programas de '+level)
     course_names_list = get_unique_course_names(level)
     unique_courses=[]
     for course_name in course_names_list:
@@ -31,6 +36,16 @@ def get_courses_from_level(level):
         trivial_course.universities=colleges
         unique_courses.append(trivial_course)
     return unique_courses
+
+def get_all_labels():
+    labels=set()
+    for course in Courses.objects.all():
+        course_labels=course.get_labels()
+        for label in course_labels:
+            labels.add(label)
+    labels=list(labels)
+    labels.sort()
+    return labels
 
 def allcourses(request):
     return render(request,'courses.html')

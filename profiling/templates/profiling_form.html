@@ -5,17 +5,51 @@
 {% block content %}
 <div class="container">
     <h1 style="padding-bottom: 50px;" >Déjanos saber un poco más de ti 😁</h1>
-        <div class="row"style="padding-bottom: 50px;" >
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+    <div class="row"style="padding-bottom: 50px;" >
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="edad" placeholder="Edad">
+        </div>
+        <div class="col-md-4">
+            <input type="email" class="form-control" name="email" placeholder="Email">
+        </div>
+    </div>
+    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;">
+        <h2 style="padding-bottom: 50px;">¿Buscas un programa de cuánta duración?</h2>
+        <div class="row">
+            {% for time in times %}
+            <div class="card col-md-4"style="max-width: 18%; max-height: 18%;">
+                <a data-time-id="{{time}}" data-selected="false" id="time-link-{{time}}"class="time-link {{time}}" href=""><img id="time-image-{{time}}"src="{% static 'assets/img/time.jpeg' %}" class="rounded-circle img-fluid border inactive"></a>
+            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">{{time}}</h5>
             </div>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="edad" placeholder="Edad">
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h2 style="padding-bottom: 50px;">¿Cuál es tu presupuesto máximo para el programa?</h2>
+        <div class="row mt-3 text-center">
+            <div class="col-md-6">
+                <label class="h3" for="budget">Presupuesto </label>
+                <input type="range" style="width: 50%;"id="budget" name="budget" min="0" max="{{max_price}}" value="0">
             </div>
-            <div class="col-md-4">
-                <input type="email" class="form-control" name="email" placeholder="Email">
+            <div class="col-md-6">
+                <output for="budget" class="h4" id="budgetOutput">$0,00 COP</output>
             </div>
         </div>
+    </div>
+    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;">
+        <h2 style="padding-bottom: 50px;">¿Cuál modalidad de estudio prefieres?</h2>
+        <div class="row">
+            {% for modality in modalities %}
+            <div class="card col-md-4"style="max-width: 18%; max-height: 18%;">
+                <a data-modality-id="{{modality}}" data-selected="false" id="modality-link-{{modality}}"class="modality-link {{modality}}" href=""><img id="modality-image-{{modality}}"src="{% static 'assets/img/modality.jpeg' %}" class="rounded-circle img-fluid border inactive"></a>
+            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">{{modality}}</h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;">
         <h2 style="padding-bottom: 50px;">¿Tienes estudios formales?</h2>
         <div class="row">
@@ -59,16 +93,29 @@
             </div>
         </div>
     </div>
+    <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;">
+        <h2 style="padding-bottom: 50px;">¿Cuáles son tus intereses?</h2>
+        <div class="row">
+            {% for label in labels %}
+            <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
+                <a data-label-id="{{label}}" data-selected="false" id="label-link-{{label}}"class="label-link {{label}}" href=""><img id="label-image-{{label}}"src="{% static 'assets/img/label.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
+            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase; font-size: 19px;">{{label}}</h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
     <form id="my-form" method="POST" action="{% url 'results' %}">
         {% csrf_token %}
-    
-        <!-- Agregar campos ocultos para opciones seleccionadas -->
-        <input type="hidden" name="estudios" id="studies-selected" value="">
+        <input type="hidden" name="studies" id="studies-selected" value="">
         {% for level in levels %}
         <input type="hidden" name="{{level.0}}" id="{{level.0}}-selected" value="">
         {% endfor %}
-        <input type="hidden" name="cursos" id="courses-selected" value="">
-        <input type="hidden" name="universidades" id="universities-selected" value="">
+        <input type="hidden" name="courses" id="courses-selected" value="">
+        <input type="hidden" name="modality" id="modality-selected" value="">
+        <input type="hidden" name="times" id="times-selected" value="">
+        <input type="hidden" name="labels" id="labels-selected" value="">
+        <input type="hidden" name="budget" id="budget-selected" value="">
+        <input type="hidden" name="universities" id="universities-selected" value="">
         <button type="submit" class="btn btn-primary send_button py-sm-3 px-sm-5">Enviar</button>
     </form>
 </div>
@@ -212,31 +259,111 @@
                 }
             });
         });
+        const budgetInput = document.getElementById("budget");
+        const budgetOutput = document.getElementById("budgetOutput");
+
+        budgetInput.addEventListener("input", () => {
+            const value = budgetInput.value;
+            const formattedValue = new Intl.NumberFormat("es-ES", {
+                style: "currency",
+                currency: "COP"
+            }).format(value);
+
+            budgetOutput.textContent = "$"+formattedValue;
+        });
+        function unselect_things(thing){
+            const thingLinks = document.querySelectorAll("."+thing+"-link");
+            thingLinks.forEach (th => {
+                const thingId = th.dataset[thing+"Id"];
+                    const thingImage = document.getElementById(thing+`-image-${thingId}`);
+                    const thingLink = document.getElementById(thing+`-link-${thingId}`);
+                    if (thingLink && thingLink.classList.contains("selected")) {
+                        unselect_image(thingImage)
+                        thingLink.classList.remove("selected");
+                    }
+                }
+            );
+        }
+        function singleLinks(thing){
+            const thingLinks = document.querySelectorAll("."+thing+"-link");
+            thingLinks.forEach(function(link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    const thingId = link.dataset[thing+"Id"];
+                    const thingImage = document.getElementById(`${thing}-image-${thingId}`);
+                    const thingLink = document.getElementById(`${thing}-link-${thingId}`);
+                    if (thingLink.classList.contains("selected")) {
+                        unselect_image(thingImage)
+                        thingLink.classList.remove("selected");
+                    } else{
+                        unselect_things(thing);
+                        select_image(thingImage)
+                        thingLink.classList.add("selected");
+                    }
+                });
+            });
+        }
+        function multiplyLinks(thing){
+            const thingLinks = document.querySelectorAll("."+thing+"-link");
+            thingLinks.forEach(function(link) {
+                link.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    const thingId = link.dataset[thing+"Id"];
+                    const thingImage = document.getElementById(`${thing}-image-${thingId}`);
+                    const thingLink = document.getElementById(`${thing}-link-${thingId}`);
+                    if (thingLink.classList.contains("selected")) {
+                        unselect_image(thingImage)
+                        thingLink.classList.remove("selected");
+                    } else{
+                        select_image(thingImage)
+                        thingLink.classList.add("selected");
+                    }
+                });
+            });
+        }
+        singleLinks("modality");
+        multiplyLinks("time")
+        multiplyLinks("label")
         const form = document.getElementById("my-form");
         const studiesSelected = document.getElementById("studies-selected");
         const undergraduateSelected = document.getElementById("pregrado-selected");
         const masterSelected = document.getElementById("maestría-selected");
         const doctorateSelected = document.getElementById("doctorado-selected");
+        const modalitySelected = document.getElementById("modality-selected");
+        const timesSelected = document.getElementById("times-selected");
+        const labelsSelected = document.getElementById("labels-selected");
+        const budgetSelected = document.getElementById("budget-selected");
         const coursesSelected = document.getElementById("courses-selected");
         const universitiesSelected = document.getElementById("universities-selected");
         const sendButton = document.querySelector(".send_button");
 
         sendButton.addEventListener("click", function(e) {
             e.preventDefault();
-            const estudios = document.getElementById("studies").style.display === "block" ? "Sí" : "No";
-            const undergraduate = document.getElementById("pregrado").style.display === "block" ? "Pregrado" : "";
-            const master = document.getElementById("maestría").style.display === "block" ? "Master" : "";
-            const doctorate = document.getElementById("doctorado").style.display === "block" ? "Doctorado" : "";
+            const studies = document.getElementById("studies").style.display === "block" ? "yes" : "no";
+            const undergraduate = document.getElementById("pregrado").style.display === "block" ? "undergraduate" : "";
+            const master = document.getElementById("maestría").style.display === "block" ? "master" : "";
+            const doctorate = document.getElementById("doctorado").style.display === "block" ? "doctorate" : "";
             const selectedCursos = document.querySelectorAll(".course-link.selected");
             const selectedUniversities = document.querySelectorAll(".university-link.selected");
-            const cursos = Array.from(selectedCursos).map(course => course.dataset.courseId).join(", ");
-            const universities = Array.from(selectedUniversities).map(university => university.dataset.universityId).join(", ");
-            studiesSelected.value = estudios;
+            const selectedModality = document.querySelectorAll(".modality-link.selected");
+            const selectedTime = document.querySelectorAll(".time-link.selected");
+            const selectedLabels = document.querySelectorAll(".label-link.selected");
+            const budget = document.getElementById("budget").value
+            const courses = Array.from(selectedCursos).map(course => course.dataset.courseId);
+            const modality = Array.from(selectedModality).map(modality => modality.dataset.modalityId);
+            const times = Array.from(selectedTime).map(time => time.dataset.timeId);
+            const labels = Array.from(selectedLabels).map(label => label.dataset.labelId);
+            const universities = Array.from(selectedUniversities).map(university => university.dataset.universityId);
+            studiesSelected.value = studies;
             undergraduateSelected.value = undergraduate;
             masterSelected.value = master;
-            doctorateSelected.value = doctorate;            
-            coursesSelected.value = cursos;
-            universitiesSelected.value = universities;
+            doctorateSelected.value = doctorate;   
+            modalitySelected.value=modality;
+            timesSelected.value = JSON.stringify({ times: times });
+            labelsSelected.value = JSON.stringify({ labels: labels });
+            budgetSelected.value = budget;
+            coursesSelected.value = JSON.stringify({ courses: courses });
+            universitiesSelected.value = JSON.stringify({ universities: universities }) ;
             form.submit();
         });
         
