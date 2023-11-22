@@ -1,21 +1,17 @@
 {
  "response": {
   "studies": {
-   "high_school": "high_school",
+   "high_school": "",
    "undergraduate": "",
    "specialization": "",
-   "colleges": [
-    "3"
-   ],
+   "colleges": [],
    "master": "",
-   "doctorate": "doctorate",
-   "courses": [
-    "17"
-   ]
+   "doctorate": "",
+   "courses": []
   },
   "preferences": {
-   "budget": "119002310",
-   "modality": "presencial",
+   "budget": "150000000",
+   "modality": "",
    "times": [
     "200 horas o menos",
     "0.5 a 3.5 a\u00f1os",
@@ -23,12 +19,7 @@
    ]
   },
   "interest": {
-   "labels": [
-    "conservaci\u00f3n ambiental",
-    "ecolog\u00eda",
-    "energ\u00eda",
-    "gen\u00f3mica"
-   ]
+   "labels": []
   }
  }
 }

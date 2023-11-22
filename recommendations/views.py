@@ -76,7 +76,7 @@ class recommendation_form():
             item=Courses.objects.filter(idcourse=course)[0]
             exclude_courses.append(item.idcourse)
         for course in allcourses:
-            if course.academic_level in posi_levels and course.modality==self.preferences["modality"] and course not in exclude_courses:
+            if course.academic_level in posi_levels and course.modality==self.preferences["modality"] and course not in exclude_courses and course.price<int(self.preferences["budget"]):
                 print(course.name)
                 compatible_courses.append(course)
         return compatible_courses
@@ -92,6 +92,7 @@ class default_recommendation(recommendation_form):
         super().__init__(form)
     def get_courses(self):
         return self.default_search()
+
     
 class embedding_recommendation(recommendation_form):
     def __init__(self,form):
@@ -125,30 +126,22 @@ class embedding_recommendation(recommendation_form):
             for j in courses:
                 if j["idcourse"]==i.idcourse:
                     i.emb=j["embedding"]
+            print(i.name)
             emb = i.emb
             similarity=cosine_similarity(emb,emb_req)
-            i.match=similarity
+            i.match=round((similarity*100),2)
             similarity_list.append((i, similarity))
-            '''sim.append(similarity)
-        sim = np.array(sim)
-        idx = np.argmax(sim)
-        idx = int(idx)
-        respuesta=[(items[idx])]'''
-        # Ordenar la lista de similitud de mayor a menor
         similarity_list.sort(key=lambda x: x[1], reverse=True)
-
-        # Obtener la respuesta con todos los elementos ordenados
         respuesta = [item for item, _ in similarity_list]
-        for r in respuesta:
-            print(r.name)
-            print(r.match)
+        return respuesta
 
 
 
 def results(request,profile_form):
-    print("Entro a resultados")
     recommend=default_recommendation(profile_form)
-    print(recommend.default_search())
+    recommended=recommend.get_courses()
+    return recommended
+def emb_results(request,profile_form):
     emb_recommend=embedding_recommendation(profile_form)
-    print(emb_recommend.get_courses())
-    return render(request,'results.html')
+    recommended=emb_recommend.get_courses()
+    return recommended

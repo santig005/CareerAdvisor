@@ -22,7 +22,7 @@ def profiling_form_json():
     levels=[undergraduate,specialization,master,doctorate]
     modalities=["presencial","online","hibrida","indiferente"]
     times=["200 horas o menos", "0.5 a 3.5 años", "Más de 4 años"]
-    labels=courses_views.get_all_labels
+    labels=courses_views.get_all_labels()
     greatest_price=courses_views.greatest_course_price()
     return {'levels':levels,'modalities':modalities, 'times':times,'labels':labels,'max_price':greatest_price}
 
@@ -89,8 +89,6 @@ def response(request):
         )
         item=Applicant.objects.get(email=email)
         idapplicant=item.idapplicant
-        print("creado")
-    print("idapplicant",idapplicant)
     person=get_object_or_404(Applicant,idapplicant=idapplicant)
     Profiling.objects.create(
         applicant_idappilicant=person,
@@ -98,12 +96,11 @@ def response(request):
         preferences=results["response"]["preferences"],
         interest=results["response"]["interest"],
     )
-    profile_form=Profiling.objects.filter(applicant_idappilicant=person)[0]
-    print("profile_form")
+    profile_form=Profiling.objects.filter(applicant_idappilicant=person).last()
     new_form=form(profile_form.applicant_idappilicant,profile_form.studies,profile_form.preferences,profile_form.interest)
-    print("new_form")
-    recommendations_views.results(request,new_form)
-        
-    
-    
-    return render(request, "results.html")
+    recommended=recommendations_views.emb_results(request,new_form)
+    for course in recommended:
+        college = College.objects.filter(idcollege=course.college_idcollege_id)[0]
+        course.college = college
+    recommended=recommended[:6]
+    return render(request,'results.html',{"allcourses":recommended})
