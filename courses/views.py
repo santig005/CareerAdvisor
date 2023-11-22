@@ -107,7 +107,7 @@ def add_descriptions_to_courses():
         if not existance.description:
             existance.description=course['description']
             existance.save()
-    
+  
 def prueba_emb():
     with open('course_descriptions_embeddings.json', 'r') as file:
         file_content = file.read()
@@ -147,5 +147,16 @@ def allcourses(request):
     #create_embeddings()
     #add_embeddings_db()
     #prueba_emb()
-    return render(request,'courses.html')
+    print("a0")
+    allcourses = Courses.objects.all()
+    print("a01")
+    for course in allcourses:
+        print("a1")
+        college = College.objects.filter(idcollege=course.college_idcollege_id)[0]
+        print("a2")
+        course.college = college 
+        print("a3")
+    print("b")
+    print(len(allcourses))
+    return render(request,'courses.html', {'allcourses': allcourses})
 

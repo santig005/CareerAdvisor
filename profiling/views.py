@@ -46,9 +46,6 @@ def response(request):
         print("Hay campo(s) sin llenar")
     
 
-
-
-
     modality=get_from_request(request,"modality")
     budget=get_from_request(request,"budget")
     times=get_array_from_request(request,"times")
