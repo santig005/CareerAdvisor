@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'page',
     'courses',
     'profiling',
+    'recommendations',
 ]
 
 MIDDLEWARE = [

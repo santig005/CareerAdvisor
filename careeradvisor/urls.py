@@ -28,6 +28,7 @@ urlpatterns = [
     path("login/",views.login,name='login'),
     path("",include('courses.urls')),
     path("profiling/",include('profiling.urls')),
+    path("recommendations/",include('recommendations.urls')),
     
 ]
 urlpatterns += staticfiles_urlpatterns()

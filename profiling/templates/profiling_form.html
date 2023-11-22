@@ -7,13 +7,13 @@
     <h1 style="padding-bottom: 50px;" >Déjanos saber un poco más de ti 😁</h1>
     <div class="row"style="padding-bottom: 50px;" >
         <div class="col-md-4">
-            <input type="text" class="form-control" name="nombre" placeholder="Nombre">
+            <input id="name-box" type="text" class="form-control" name="name" placeholder="Nombre">
         </div>
         <div class="col-md-4">
-            <input type="text" class="form-control" name="edad" placeholder="Edad">
+            <input id="age-box" type="text" class="form-control" name="age" placeholder="Edad">
         </div>
         <div class="col-md-4">
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <input id="email-box" type="email" class="form-control" name="email" placeholder="Email">
         </div>
     </div>
     <div class="mt-4"style="padding-top=50px;padding-bottom: 50px;">
@@ -59,6 +59,10 @@
             </div>
             <div id="studies" style="display:none">
                 <div class="row d-flex">
+                    <div class="card col-md-4"style="max-width: 20%; max-height: 20%;">
+                        <a id="Bachillerato-link"href=""><img id="Bachillerato-image"src="{% static 'assets/img/studies.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
+                        <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase;">Bachillerato</h5>
+                    </div>
                     {% for level in levels %}
                     <div class="card col-md-4"style="max-width: 20%; max-height: 20%;">
                         <a id="{{level.0}}-link"href=""><img id="{{level.0}}-image"src="{% static 'assets/img/studies.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
@@ -99,14 +103,18 @@
             {% for label in labels %}
             <div class="card col-md-4"style="max-width: 15%; max-height: 15%;">
                 <a data-label-id="{{label}}" data-selected="false" id="label-link-{{label}}"class="label-link {{label}}" href=""><img id="label-image-{{label}}"src="{% static 'assets/img/label.jpg' %}" class="rounded-circle img-fluid border inactive"></a>
-            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase; font-size: 19px;">{{label}}</h5>
+            <h5 class="text-center mt-3 mb-3" style="text-transform: uppercase; font-size: 12x;">{{label}}</h5>
             </div>
             {% endfor %}
         </div>
     </div>
-    <form id="my-form" method="POST" action="{% url 'results' %}">
+    <form id="my-form" method="POST" action="{% url 'response' %}">
         {% csrf_token %}
+        <input type="hidden" name="name" id="name" value="name">
+        <input type="hidden" name="age" id="age" value="age">
+        <input type="hidden" name="email" id="email" value="email">
         <input type="hidden" name="studies" id="studies-selected" value="">
+        <input type="hidden" name="Bachillerato" id="Bachillerato-selected" value="">
         {% for level in levels %}
         <input type="hidden" name="{{level.0}}" id="{{level.0}}-selected" value="">
         {% endfor %}
@@ -145,23 +153,31 @@
             const levelLink = document.getElementById(level+"-link");
             const levelSection = document.getElementById(level);
             const levelImage = document.getElementById(level+"-image");
-            if (levelSection.style.display === "block") {
+            if(levelSection){
+                if (levelSection.style.display === "block") {
                 unselect_image(levelImage)
                 levelSection.style.display = "none";
-            }
-            const courseLinks = document.querySelectorAll("."+level);
-            courseLinks.forEach(course => {
-                const courseId = course.dataset.courseId;
-                const courseImage = document.getElementById(`course-image-${courseId}`);
-                const courseLink = document.getElementById(`course-link-${courseId}`);
-                const universitySection = document.getElementById(`university-${courseId}`);
-                if (courseLink.classList.contains("selected")) {
-                unselect_image(courseImage)
-                courseLink.classList.remove("selected");
-                universitySection.style.display = "none";
                 }
-                unselect_universities(courseId);
-            });
+                const courseLinks = document.querySelectorAll("."+level);
+                courseLinks.forEach(course => {
+                    const courseId = course.dataset.courseId;
+                    const courseImage = document.getElementById(`course-image-${courseId}`);
+                    const courseLink = document.getElementById(`course-link-${courseId}`);
+                    const universitySection = document.getElementById(`university-${courseId}`);
+                    if (courseLink.classList.contains("selected")) {
+                    unselect_image(courseImage)
+                    courseLink.classList.remove("selected");
+                    universitySection.style.display = "none";
+                    }
+                    unselect_universities(courseId);
+                });
+            }
+            else{
+                if (levelLink.classList.contains("selected")) {
+                    unselect_image(levelImage)
+                    levelLink.classList.remove("selected");
+                }
+            }
         }
         const studiesLink = document.getElementById("studies-link");
         const studiesSection = document.getElementById("studies");
@@ -178,8 +194,10 @@
                 unselect_image(studiesImage)
                 studiesSection.style.display = "none";
                 unselect_courses("pregrado");
+                unselect_courses("especialización");
                 unselect_courses("maestría");
                 unselect_courses("doctorado");
+                unselect_courses("Bachillerato");
             }
         });
         // This script display the studies section when "No, no tengo" option is selected
@@ -203,8 +221,10 @@
                 }
             }
             unselect_courses("pregrado");
+            unselect_courses("especialización");
             unselect_courses("maestría");
             unselect_courses("doctorado");
+            unselect_courses("Bachillerato");
         });
         function event_level(level){
             const levelLink = document.getElementById(level+"-link");
@@ -212,17 +232,30 @@
             const levelImage = document.getElementById(level+"-image");
             levelLink.addEventListener("click", function(e) {
             e.preventDefault();
-            if (levelSection.style.display === "none") {
+            if(levelSection){
+                if (levelSection.style.display === "none") {
                 select_image(levelImage)
                 levelSection.style.display = "block";
-            } else {
-                unselect_courses(level)
+                } else {
+                    unselect_courses(level)
+                }
+            }
+            else{
+                if (levelLink.classList.contains("selected")) {
+                    unselect_image(levelImage)
+                    levelLink.classList.remove("selected");
+                } else{
+                    select_image(levelImage)
+                    levelLink.classList.add("selected");
+                }
             }
             });
         }
         event_level("pregrado")
+        event_level("especialización")
         event_level("maestría")
         event_level("doctorado")
+        event_level("Bachillerato")
         courseLinks.forEach(function(link) {
             link.addEventListener("click", function(e) {
                 e.preventDefault();
@@ -325,8 +358,13 @@
         multiplyLinks("time")
         multiplyLinks("label")
         const form = document.getElementById("my-form");
+        const name=document.getElementById("name");
+        const age=document.getElementById("age");
+        const email=document.getElementById("email");
         const studiesSelected = document.getElementById("studies-selected");
+        const high_schoolSelected = document.getElementById("Bachillerato-selected")
         const undergraduateSelected = document.getElementById("pregrado-selected");
+        const specializationSelected = document.getElementById("especialización-selected");
         const masterSelected = document.getElementById("maestría-selected");
         const doctorateSelected = document.getElementById("doctorado-selected");
         const modalitySelected = document.getElementById("modality-selected");
@@ -339,8 +377,13 @@
 
         sendButton.addEventListener("click", function(e) {
             e.preventDefault();
+            const name_box = document.getElementById("name-box").value;
+            const age_box = document.getElementById("age-box").value;
+            const email_box = document.getElementById("email-box").value;
             const studies = document.getElementById("studies").style.display === "block" ? "yes" : "no";
+            const high_school = document.getElementById("Bachillerato-link").classList.contains("selected")? "high_school" : "";
             const undergraduate = document.getElementById("pregrado").style.display === "block" ? "undergraduate" : "";
+            const specialization =document.getElementById("especialización").style.display === "block" ? "specialization" : "";
             const master = document.getElementById("maestría").style.display === "block" ? "master" : "";
             const doctorate = document.getElementById("doctorado").style.display === "block" ? "doctorate" : "";
             const selectedCursos = document.querySelectorAll(".course-link.selected");
@@ -354,8 +397,13 @@
             const times = Array.from(selectedTime).map(time => time.dataset.timeId);
             const labels = Array.from(selectedLabels).map(label => label.dataset.labelId);
             const universities = Array.from(selectedUniversities).map(university => university.dataset.universityId);
+            name.value = name_box;
+            age.value = age_box;
+            email.value = email_box;
             studiesSelected.value = studies;
+            high_schoolSelected.value = high_school;
             undergraduateSelected.value = undergraduate;
+            specializationSelected.value = specialization;
             masterSelected.value = master;
             doctorateSelected.value = doctorate;   
             modalitySelected.value=modality;

@@ -12,7 +12,7 @@ def get_default_array():
   return default_arr.tobytes()
 
 class Applicant(models.Model):
-    idapplicant = models.IntegerField(primary_key=True)
+    idapplicant = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45, blank=True, null=True)
     email = models.CharField(max_length=45, blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)

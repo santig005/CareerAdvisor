@@ -16,14 +16,14 @@ def greatest_course_price():
 
 # The next function gets the set of different course names
 def get_unique_course_names(level):
-    allcourses = Courses.objects.filter(academic_level=level).values()
+    allcourses = Courses.objects.filter(academic_level=level).order_by("name").values()
     course_names_set = set(course['name'] for course in allcourses)
     course_names_list = list(course_names_set)
     return course_names_list
 
 # The next function gets the set of colleges that provide a course
 def get_provider_colleges(course_name):
-    named_courses=Courses.objects.filter(name=course_name)
+    named_courses=Courses.objects.filter(name=course_name).order_by("name")
     provided_by=set()
     for n in named_courses:
         college=College.objects.filter(idcollege=n.college_idcollege_id)[0]
@@ -146,6 +146,6 @@ def allcourses(request):
     #save_course_names_and_labels(output_json_file)
     #create_embeddings()
     #add_embeddings_db()
-    prueba_emb()
+    #prueba_emb()
     return render(request,'courses.html')
 
