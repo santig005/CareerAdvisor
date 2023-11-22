@@ -1,17 +1,21 @@
 {
  "response": {
   "studies": {
-   "high_school": "",
-   "undergraduate": "",
+   "high_school": "high_school",
+   "undergraduate": "undergraduate",
    "specialization": "",
-   "colleges": [],
+   "colleges": [
+    "4"
+   ],
    "master": "",
    "doctorate": "",
-   "courses": []
+   "courses": [
+    "11"
+   ]
   },
   "preferences": {
-   "budget": "150000000",
-   "modality": "",
+   "budget": "127173517",
+   "modality": "presencial",
    "times": [
     "200 horas o menos",
     "0.5 a 3.5 a\u00f1os",
@@ -19,7 +23,11 @@
    ]
   },
   "interest": {
-   "labels": []
+   "labels": [
+    "ciberseguridad",
+    "ciencia de datos",
+    "criptomonedas"
+   ]
   }
  }
 }
