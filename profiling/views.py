@@ -4,6 +4,8 @@ from page.models import Courses,College
 import courses.views as courses_views
 import json
 # Create your views here.
+
+
 def profiling_form_json():
     undergraduate=["pregrado",courses_views.get_courses_from_level("pregrado")]
     master=["maestría",courses_views.get_courses_from_level("maestría")]

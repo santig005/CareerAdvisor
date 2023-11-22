@@ -46,6 +46,7 @@ class Courses(models.Model):
     labels = models.JSONField(blank=True, null=True)
     price = models.IntegerField(blank=True, null=True)
     college_idcollege = models.ForeignKey(College, models.DO_NOTHING, db_column='College_idCollege')  # Field name made lowercase.
+    description = models.CharField(max_length=800, blank=True, null=True)
     emb = models.BinaryField(blank=True, null=True,default=get_default_array())
 
     class Meta:

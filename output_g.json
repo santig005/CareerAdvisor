@@ -1,0 +1,140 @@
+[
+  {
+    "idcourse": 1,
+    "college": 1,
+    "name": "ingenieria de sistemas",
+    "description": "ingenieria de sistemas, Universidad de Antioquia, sistemas, tecnolog\u00eda, software, big data, ciberseguridad, dise\u00f1o de software, soluciones inform\u00e1ticas, redes, programaci\u00f3n"
+  },
+  {
+    "idcourse": 2,
+    "college": 1,
+    "name": "ingenieria de sistemas",
+    "description": "ingenieria de sistemas, Universidad de Antioquia, sistemas, tecnolog\u00eda, software, big data, ciberseguridad, dise\u00f1o de software, soluciones inform\u00e1ticas, redes, programaci\u00f3n"
+  },
+  {
+    "idcourse": 3,
+    "college": 2,
+    "name": "ingenieria de sistemas",
+    "description": "ingenieria de sistemas, Universidad Nacional, sistemas, tecnolog\u00eda, software, big data, ciberseguridad, dise\u00f1o de software, soluciones inform\u00e1ticas, redes, programaci\u00f3n"
+  },
+  {
+    "idcourse": 4,
+    "college": 3,
+    "name": "ingenieria de sistemas",
+    "description": "ingenieria de sistemas, Universidad EAFIT, sistemas, tecnolog\u00eda, software, big data, ciberseguridad, dise\u00f1o de software, soluciones inform\u00e1ticas, redes, programaci\u00f3n"
+  },
+  {
+    "idcourse": 5,
+    "college": 4,
+    "name": "ingenieria de sistemas",
+    "description": "ingenieria de sistemas, Universidad EIA, sistemas, tecnolog\u00eda, software, big data, ciberseguridad, dise\u00f1o de software, soluciones inform\u00e1ticas, redes, programaci\u00f3n"
+  },
+  {
+    "idcourse": 6,
+    "college": 2,
+    "name": "ingenieria mec\u00e1nica",
+    "description": "ingenieria mec\u00e1nica, Universidad Nacional, energ\u00eda, automatizaci\u00f3n, rob\u00f3tica, veh\u00edculos, materiales, m\u00e1quinas"
+  },
+  {
+    "idcourse": 7,
+    "college": 3,
+    "name": "ingenieria mec\u00e1nica",
+    "description": "ingenieria mec\u00e1nica, Universidad EAFIT, energ\u00eda, automatizaci\u00f3n, rob\u00f3tica, veh\u00edculos, materiales, m\u00e1quinas"
+  },
+  {
+    "idcourse": 8,
+    "college": 3,
+    "name": "ingenieria matem\u00e1tica",
+    "description": "ingenieria matem\u00e1tica, Universidad EAFIT, matem\u00e1ticas aplicadas, modelado matem\u00e1tico, estad\u00edstica, inteligencia artificial, machine learning, big data"
+  },
+  {
+    "idcourse": 9,
+    "college": 3,
+    "name": "ingenieria de dise\u00f1o de producto",
+    "description": "ingenieria de dise\u00f1o de producto, Universidad EAFIT, Dise\u00f1o, Producto, Creaci\u00f3n, Innovaci\u00f3n, Desarrollo, Modelado"
+  },
+  {
+    "idcourse": 10,
+    "college": 3,
+    "name": "ingenieria f\u00edsica",
+    "description": "ingenieria f\u00edsica, Universidad EAFIT, F\u00edsica, Tecnolog\u00eda, Ciencia, Desarrollo, Aplicaci\u00f3n, universo"
+  },
+  {
+    "idcourse": 11,
+    "college": 4,
+    "name": "ingenieria mecatr\u00f3nica",
+    "description": "ingenieria mecatr\u00f3nica, Universidad EIA, Mecatr\u00f3nica, Automatizaci\u00f3n, Rob\u00f3tica, Electromec\u00e1nica, Control, Desarrollo"
+  },
+  {
+    "idcourse": 12,
+    "college": 1,
+    "name": "Bioingenier\u00eda",
+    "description": "Bioingenier\u00eda, Universidad de Antioquia, Biomedicina, Fisiolog\u00eda, Gen\u00f3mica, Biotecnolog\u00eda, Farmacolog\u00eda, Salud"
+  },
+  {
+    "idcourse": 13,
+    "college": 3,
+    "name": "maestr\u00eda en matem\u00e1ticas aplicadas",
+    "description": "maestr\u00eda en matem\u00e1ticas aplicadas, Universidad EAFIT, matem\u00e1ticas aplicadas, modelado matem\u00e1tico, estad\u00edstica, inteligencia artificial, machine learning, big data, soluciones inform\u00e1ticas"
+  },
+  {
+    "idcourse": 14,
+    "college": 3,
+    "name": "maestr\u00eda en ciencia de datos y anal\u00edtica-profundizaci\u00f3n",
+    "description": "maestr\u00eda en ciencia de datos y anal\u00edtica-profundizaci\u00f3n, Universidad EAFIT, matem\u00e1ticas aplicadas, modelado matem\u00e1tico, estad\u00edstica, ciencia de datos, anal\u00edtica de datos, inteligencia artificial, machine learning, big data"
+  },
+  {
+    "idcourse": 15,
+    "college": 3,
+    "name": "maestr\u00eda en ciencia de datos y anal\u00edtica-investigaci\u00f3n",
+    "description": "maestr\u00eda en ciencia de datos y anal\u00edtica-investigaci\u00f3n, Universidad EAFIT, matem\u00e1ticas aplicadas, modelado matem\u00e1tico, estad\u00edstica, ciencia de datos, anal\u00edtica de datos, inteligencia artificial, machine learning, big data, investigaci\u00f3n"
+  },
+  {
+    "idcourse": 16,
+    "college": 3,
+    "name": "maestr\u00eda en administraci\u00f3n",
+    "description": "maestr\u00eda en administraci\u00f3n, Universidad EAFIT, matem\u00e1ticas aplicadas, gesti\u00f3n, control, estrategia, direcci\u00f3n, planificaci\u00f3n, investigaci\u00f3n"
+  },
+  {
+    "idcourse": 17,
+    "college": 4,
+    "name": "maestr\u00eda en ingenier\u00eda biom\u00e9dica - profundizaci\u00f3n en ingenier\u00eda cl\u00ednica",
+    "description": "maestr\u00eda en ingenier\u00eda biom\u00e9dica - profundizaci\u00f3n en ingenier\u00eda cl\u00ednica, Universidad EIA, Biomedicina, Fisiolog\u00eda, Gen\u00f3mica, Biotecnolog\u00eda, Farmacolog\u00eda, Salud"
+  },
+  {
+    "idcourse": 18,
+    "college": 3,
+    "name": "doctorado en ingenier\u00eda",
+    "description": "doctorado en ingenier\u00eda, Universidad EAFIT, ingenier\u00eda avanzada, investigaci\u00f3n, ingenier\u00eda en general, investigaci\u00f3n aplicada"
+  },
+  {
+    "idcourse": 19,
+    "college": 1,
+    "name": "doctorado en ingenier\u00eda ambiental",
+    "description": "doctorado en ingenier\u00eda ambiental, Universidad de Antioquia, Ambiental, Ecolog\u00eda, Sostenibilidad, Conservaci\u00f3n, Ecol\u00f3gico, Medioambiental"
+  },
+  {
+    "idcourse": 20,
+    "college": 1,
+    "name": "doctorado en ingenier\u00eda electr\u00f3nica",
+    "description": "doctorado en ingenier\u00eda electr\u00f3nica, Universidad de Antioquia, Electr\u00f3nica, Circuitos, Dispositivos, Sensores, Microelectr\u00f3nica, Sistemas"
+  },
+  {
+    "idcourse": 21,
+    "college": 3,
+    "name": "especializaci\u00f3n en gerencia de proyectos",
+    "description": "especializaci\u00f3n en gerencia de proyectos, Universidad EAFIT, Proyectos, Gesti\u00f3n, Administraci\u00f3n, Coordinaci\u00f3n, Supervisi\u00f3n, Planificaci\u00f3n"
+  },
+  {
+    "idcourse": 22,
+    "college": 3,
+    "name": "especializaci\u00f3n en direcci\u00f3n de operaciones y log\u00edstica",
+    "description": "especializaci\u00f3n en direcci\u00f3n de operaciones y log\u00edstica, Universidad EAFIT, Operaciones, Ejecuci\u00f3n, Funcionamiento, Log\u00edstica, Distribuci\u00f3n, Coordinaci\u00f3n"
+  },
+  {
+    "idcourse": 23,
+    "college": 4,
+    "name": "especializaci\u00f3n en big data",
+    "description": "especializaci\u00f3n en big data, Universidad EIA, Datos, Gigainformaci\u00f3n, bigdata, An\u00e1lisis, Datolog\u00eda, Infom\u00e9trica"
+  }
+]
