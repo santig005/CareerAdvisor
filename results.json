@@ -14,7 +14,7 @@
    ]
   },
   "preferences": {
-   "budget": "127173517",
+   "budget": "132426435",
    "modality": "presencial",
    "times": [
     "200 horas o menos",
@@ -24,9 +24,7 @@
   },
   "interest": {
    "labels": [
-    "ciberseguridad",
-    "ciencia de datos",
-    "criptomonedas"
+    "blockchain"
    ]
   }
  }
